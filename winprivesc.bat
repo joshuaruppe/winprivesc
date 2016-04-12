@@ -42,12 +42,6 @@ ver
 echo.
 echo [++System Info]
 systeminfo
-echo [++Boot.ini]
-more c:\boot.ini
-echo.
-echo [++OS Architecture]
-wmic os get osarchitecture
-echo.
 echo [++Hostname]
 hostname
 echo.
@@ -57,6 +51,8 @@ echo.
 echo [++Network Drives]
 net use
 echo.
+echo [++Hosts File]
+more c:\WINDOWS\System32\drivers\etc\hosts
 EXIT /B
 
 :NETWORK
