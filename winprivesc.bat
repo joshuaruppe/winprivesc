@@ -51,10 +51,11 @@ echo.
 echo [++Hostname]
 hostname
 echo.
-echo [++Physical / Network Drives]
+echo [++Physical Drives]
 net share
+echo.
+echo [++Network Drives]
 net use
-wmic share
 echo.
 EXIT /B
 
