@@ -1,5 +1,7 @@
 @echo off
 title Windows XP Privilege Escalation Script
+echo Loading System Information, 3secs...
+systeminfo > systeminfo.txt 2> nul
 cls
 :MENU
 echo " _       ___       ____       _       ______         
@@ -8,52 +10,74 @@ echo "| | /| / / / __ \/ /_/ / ___/ / | / / __/ / ___/ ___/
 echo "| |/ |/ / / / / / ____/ /  / /| |/ / /___(__  ) /__  
 echo "|__/|__/_/_/ /_/_/   /_/  /_/ |___/_____/____/\___/   
 echo.
-echo "Windows Enumeration and Privilege Escalation Script
-echo "www.joshruppe.com | Twitter: @josh_ruppe
+echo Windows Enumeration and Privilege Escalation Script
+echo www.joshruppe.com ^| Twitter: @josh_ruppe
 echo.
-echo 1 - Run All Scripts
+
+echo 1 - All to Report
 echo 2 - Operating System
-echo 3 - Networking
-echo 4 - Processess
-echo 5 - User Info
-echo 6 - Hardware
-echo 7 - Exit
+echo 3 - Storage
+echo 4 - Networking
+echo 5 - Processess
+echo 6 - User Info
+echo 7 - Hardware
+echo 8 - Exit
 echo.
-SET /P M=Type 1, 2, or 3 then press ENTER:
-IF %M%==1 GOTO ALL
-IF %M%==2 GOTO OS
-IF %M%==3 GOTO NETWORK
-IF %M%==4 GOTO PROCESSES
-IF %M%==5 GOTO USERS
-IF %M%==6 GOTO HARDWARE
-IF %M%==7 GOTO EXIT
+SET /P C=Select^>
+echo.
+IF %C%==1 GOTO ALL
+IF %C%==2 GOTO OS
+IF %C%==3 GOTO STORAGE
+IF %C%==4 GOTO NETWORK
+IF %C%==5 GOTO PROCESSES
+IF %C%==6 GOTO USERS
+IF %C%==7 GOTO HARDWARE
+IF %C%==8 GOTO EXIT
 
 :ALL
-GOTO OS
-GOTO NETWORK
+echo NOT READY YET!
 
 :OS
 echo ##########################
 echo #### OPERATING SYSTEM ####
 echo ##########################
 echo.
-echo [++Windows Version]
-ver
+echo [++OS Name]
 echo.
-echo [++System Info]
-systeminfo
-echo [++Hostname]
-hostname
+for /F "tokens=3-7" %%a IN ('find /i "OS Name:" systeminfo.txt') do set Name=%%a %%b %%c %%d %%e
+echo %Name%
 echo.
+echo [++OS Version]
+echo.
+for /F "tokens=3-6" %%a IN ('findstr /B /C:"OS Version:" systeminfo.txt') do set Version=%%a %%b %%c %%d
+echo %Version%
+echo.
+echo [++System Architecture]
+echo.
+for /F "tokens=3-4"  %%a IN ('findstr /B /C:"System Type:" systeminfo.txt') do set Type=%%a %%b
+echo %Type%
+echo.
+echo [++System Boot Time]
+echo.
+for /F "tokens=4-6" %%a IN ('findstr /B /C:"System Boot Time:" systeminfo.txt') do set UpTime=%%a %%b %%c
+echo %UpTime%
+echo.
+echo [++Page File Location]
+echo [++Hotfix(s) Installed]
+
+
+echo [++Hosts File]
+echo.
+more c:\WINDOWS\System32\drivers\etc\hosts
+echo.
+EXIT /B
+
+:STORAGE
 echo [++Physical Drives]
 net share
 echo.
 echo [++Network Drives]
 net use
-echo.
-echo [++Hosts File]
-more c:\WINDOWS\System32\drivers\etc\hosts
-EXIT /B
 
 :NETWORK
 echo ####################
@@ -74,6 +98,8 @@ netstat -ano
 echo.
 echo [++ARP]
 arp -a
+
+DOMAIN
 EXIT /B
 
 :PROCESSES
