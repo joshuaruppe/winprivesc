@@ -1,8 +1,9 @@
 @echo off
 title Windows XP Privilege Escalation Script
+echo.
 echo Loading System Information, 3secs...
 systeminfo > systeminfo.txt 2> nul
-wmic qfe list > hotfix.txt 2> nul
+find "KB" systeminfo.txt > hotfix.txt 2> nul
 cls
 :MENU
 echo " _       ___       ____       _       ______         
@@ -71,12 +72,23 @@ echo %Page%
 echo.
 echo [++Hotfix(s) Installed]
 echo.
-for /F "tokens=5 delims=KB" %%a IN ('hotfix.txt') do set Hot=%%a
-echo %Hot%
+setlocal enabledelayedexpansion 
+for /F "tokens=2" %%a IN ('findstr /v ".TXT" hotfix.txt') do (
+  set Hot=%%~a
+  echo !Hot!
+)
 echo.
 echo [++Hosts File]
 echo.
 more c:\WINDOWS\System32\drivers\etc\hosts
+echo.
+echo [++Networks File]
+echo.
+more c:\WINDOWS\System32\drivers\etc\networks
+echo.
+echo [++Running Services]
+echo.
+net start
 echo.
 EXIT /B
 
