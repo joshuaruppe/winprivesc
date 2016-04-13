@@ -22,8 +22,7 @@ echo 3 - Storage
 echo 4 - Networking
 echo 5 - Processess
 echo 6 - User Info
-echo 7 - Hardware
-echo 8 - Exit
+echo 7 - Exit
 echo.
 SET /P C=Select^>
 echo.
@@ -129,7 +128,6 @@ arp -a
 echo.
 echo [++Firewall Configuration]
 netsh firewall show config
-echo.
 echo [++Domain]
 echo.
 set userdomain
