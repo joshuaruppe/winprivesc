@@ -33,8 +33,7 @@ IF %C%==3 GOTO STORAGE
 IF %C%==4 GOTO NETWORK
 IF %C%==5 GOTO PROCESSES
 IF %C%==6 GOTO USERS
-IF %C%==7 GOTO HARDWARE
-IF %C%==8 GOTO EXIT
+IF %C%==7 GOTO EXIT
 
 :ALL
 echo NOT READY YET!
@@ -102,7 +101,9 @@ echo [++Physical Drives]
 net share
 echo.
 echo [++Network Drives]
+echo.
 net use
+EXIT /B
 
 :NETWORK
 echo ____________________
@@ -113,10 +114,11 @@ echo.
 echo [++ICONFIG]
 ipconfig /allcompartments /all
 echo.
-echo [++MAC Address]
+echo [++MAC Addresses]
 getmac
 echo.
 echo [++Route]
+echo.
 route PRINT
 echo.
 echo [++Netstat]
@@ -124,8 +126,14 @@ netstat -ano
 echo.
 echo [++ARP]
 arp -a
-
-DOMAIN
+echo.
+echo [++Firewall Configuration]
+netsh firewall show config
+echo.
+echo [++Domain]
+echo.
+set userdomain
+echo.
 EXIT /B
 
 :PROCESSES
@@ -133,18 +141,32 @@ echo ___________________
 echo.
 echo      PROCESSES 
 echo ___________________
+echo.
+echo [++Tasklist]
+tasklist /v
+echo.
+echo [++Drivers Installed]
+driverquery /vw
+EXIT /B
 
 :USERS
 echo ___________________
 echo.
 echo      USER INFO 
 echo ___________________
-
-:HARDWARE
-echo __________________
 echo.
-echo      HARDWARE 
-echo __________________
+echo [++Current User]
+echo.
+whoami
+echo.
+echo [++All Users]
+net users
+echo.
+echo [++User Groups]
+net localgroup
+echo.
+
+EXIT /B
 
 :EXIT
 EXIT /B
