@@ -2,6 +2,7 @@
 title Windows XP Privilege Escalation Script
 echo Loading System Information, 3secs...
 systeminfo > systeminfo.txt 2> nul
+wmic qfe list > hotfix.txt 2> nul
 cls
 :MENU
 echo " _       ___       ____       _       ______         
@@ -38,9 +39,10 @@ IF %C%==8 GOTO EXIT
 echo NOT READY YET!
 
 :OS
-echo ##########################
-echo #### OPERATING SYSTEM ####
-echo ##########################
+echo __________________________
+echo.
+echo      OPERATING SYSTEM 
+echo __________________________
 echo.
 echo [++OS Name]
 echo.
@@ -62,10 +64,16 @@ echo.
 for /F "tokens=4-6" %%a IN ('findstr /B /C:"System Boot Time:" systeminfo.txt') do set UpTime=%%a %%b %%c
 echo %UpTime%
 echo.
-echo [++Page File Location]
+echo [++Page File Location(s)]
+echo.
+for /F "tokens=4" %%a IN ('findstr /B /C:"Page File Location(s):" systeminfo.txt') do set Page=%%a
+echo %Page%
+echo.
 echo [++Hotfix(s) Installed]
-
-
+echo.
+for /F "tokens=5 delims=KB" %%a IN ('hotfix.txt') do set Hot=%%a
+echo %Hot%
+echo.
 echo [++Hosts File]
 echo.
 more c:\WINDOWS\System32\drivers\etc\hosts
