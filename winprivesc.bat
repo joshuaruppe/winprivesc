@@ -93,6 +93,11 @@ echo.
 EXIT /B
 
 :STORAGE
+echo _________________
+echo.
+echo      STORAGE 
+echo _________________
+echo.
 echo [++Physical Drives]
 net share
 echo.
@@ -100,9 +105,10 @@ echo [++Network Drives]
 net use
 
 :NETWORK
-echo ####################
-echo #### NETWORKING ####
-echo ####################
+echo ____________________
+echo.
+echo      NETWORKING 
+echo ____________________
 echo.
 echo [++ICONFIG]
 ipconfig /allcompartments /all
@@ -123,19 +129,22 @@ DOMAIN
 EXIT /B
 
 :PROCESSES
-echo ###################
-echo #### PROCESSES ####
-echo ###################
+echo ___________________
+echo.
+echo      PROCESSES 
+echo ___________________
 
 :USERS
-echo ###################
-echo #### USER INFO ####
-echo ###################
+echo ___________________
+echo.
+echo      USER INFO 
+echo ___________________
 
 :HARDWARE
-echo ##################
-echo #### HARDWARE ####
-echo ##################
+echo __________________
+echo.
+echo      HARDWARE 
+echo __________________
 
 :EXIT
 EXIT /B
