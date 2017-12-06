@@ -1,5 +1,5 @@
 @echo off
-title Windows XP Privilege Escalation Script
+title Windows Privilege Escalation Script
 echo.
 echo Loading System Information, 3secs...
 systeminfo > systeminfo.txt 2> nul
