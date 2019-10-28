@@ -1,3 +1,3 @@
 # winprivesc
 
-A very simple bat script for quick Windows enumeration and privilege escalation.
+A very simple batch script for quick Windows enumeration and privilege escalation.
