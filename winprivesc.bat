@@ -1,16 +1,16 @@
 @echo off
-title Windows Privilege Escalation Script
+title Windows Enumeration and Privilege Escalation Script
 echo.
-echo Loading System Information, 3secs...
+echo Loading System Information, wait a few seconds...
 systeminfo > systeminfo.txt 2> nul
 find "KB" systeminfo.txt > hotfix.txt 2> nul
 cls
 :MENU
-echo " _       ___       ____       _       ______         
+echo " _       ___       ____       _       ______
 echo "| |     / (_)___  / __ \_____(_)   __/ ____/_________
 echo "| | /| / / / __ \/ /_/ / ___/ / | / / __/ / ___/ ___/
-echo "| |/ |/ / / / / / ____/ /  / /| |/ / /___(__  ) /__  
-echo "|__/|__/_/_/ /_/_/   /_/  /_/ |___/_____/____/\___/   
+echo "| |/ |/ / / / / / ____/ /  / /| |/ / /___(__  ) /__
+echo "|__/|__/_/_/ /_/_/   /_/  /_/ |___/_____/____/\___/
 echo.
 echo Windows Enumeration and Privilege Escalation Script
 echo www.joshruppe.com ^| Twitter: @josh_ruppe
@@ -78,7 +78,7 @@ echo %Page%>> report.txt
 echo.>> report.txt
 echo [++Hotfix(s) Installed]>> report.txt
 echo.>> report.txt
-setlocal enabledelayedexpansion 
+setlocal enabledelayedexpansion
 for /F "tokens=2" %%a IN ('findstr /v ".TXT" hotfix.txt') do (
   set Hot=%%~a
   echo !Hot!>> report.txt
@@ -174,7 +174,7 @@ EXIT /B
 :OS
 echo __________________________
 echo.
-echo      OPERATING SYSTEM 
+echo      OPERATING SYSTEM
 echo __________________________
 echo.
 echo [++OS Name]
@@ -204,7 +204,7 @@ echo %Page%
 echo.
 echo [++Hotfix(s) Installed]
 echo.
-setlocal enabledelayedexpansion 
+setlocal enabledelayedexpansion
 for /F "tokens=2" %%a IN ('findstr /v ".TXT" hotfix.txt') do (
   set Hot=%%~a
   echo !Hot!
@@ -229,7 +229,7 @@ EXIT /B
 :STORAGE
 echo _________________
 echo.
-echo      STORAGE 
+echo      STORAGE
 echo _________________
 echo.
 echo [++Physical Drives]
@@ -245,7 +245,7 @@ EXIT /B
 :NETWORK
 echo ____________________
 echo.
-echo      NETWORKING 
+echo      NETWORKING
 echo ____________________
 echo.
 echo [++ICONFIG]
@@ -277,7 +277,7 @@ EXIT /B
 :PROCESSES
 echo ___________________
 echo.
-echo      PROCESSES 
+echo      PROCESSES
 echo ___________________
 echo.
 echo [++Tasklist]
@@ -292,7 +292,7 @@ EXIT /B
 :USERS
 echo ___________________
 echo.
-echo      USER INFO 
+echo      USER INFO
 echo ___________________
 echo.
 echo [++Current User]
