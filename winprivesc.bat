@@ -20,7 +20,7 @@ echo 1 - All to Report
 echo 2 - Operating System
 echo 3 - Storage
 echo 4 - Networking
-echo 5 - Processess
+echo 5 - Processes
 echo 6 - User Info
 echo 7 - Exit
 echo.
