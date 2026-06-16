@@ -190,9 +190,14 @@ echo [++AlwaysInstallElevated - HKCU (1 = exploitable)]>> report.txt
 echo.>> report.txt
 reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated >> report.txt 2>nul
 echo.>> report.txt
-echo [++Auto-start Services Outside Windows Dir - check for unquoted paths containing spaces]>> report.txt
+echo [++Service Binaries Outside Windows Dir - check for writable binaries/dirs]>> report.txt
 echo.>> report.txt
-wmic service get name,displayname,pathname,startmode 2>nul | findstr /i "Auto" | findstr /i /v "C:\Windows\\" >> report.txt
+setlocal enabledelayedexpansion
+for /f "tokens=1,2,*" %%a in ('reg query HKLM\SYSTEM\CurrentControlSet\Services /s /v ImagePath 2^>nul ^| findstr /i "ImagePath"') do (
+  set "ip=%%c"
+  echo !ip!| findstr /i /v "Windows SystemRoot System32" >nul && echo !ip!>> report.txt
+)
+endlocal
 echo.>> report.txt
 echo [++Stored Credentials - cmdkey]>> report.txt
 echo.>> report.txt
@@ -403,9 +408,14 @@ echo [++AlwaysInstallElevated - HKCU (1 = exploitable)]
 echo.
 reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated 2>nul
 echo.
-echo [++Auto-start Services Outside Windows Dir - check for unquoted paths containing spaces]
+echo [++Service Binaries Outside Windows Dir - check for writable binaries/dirs]
 echo.
-wmic service get name,displayname,pathname,startmode 2>nul | findstr /i "Auto" | findstr /i /v "C:\Windows\\"
+setlocal enabledelayedexpansion
+for /f "tokens=1,2,*" %%a in ('reg query HKLM\SYSTEM\CurrentControlSet\Services /s /v ImagePath 2^>nul ^| findstr /i "ImagePath"') do (
+  set "ip=%%c"
+  echo !ip!| findstr /i /v "Windows SystemRoot System32" >nul && echo !ip!
+)
+endlocal
 echo.
 echo [++Stored Credentials - cmdkey]
 echo.
