@@ -1,5 +1,5 @@
 @echo off
-title Windows Enumeration and Privilege Escalation Script
+title Windows Enumeration and Privilege Escalation Discovery
 echo.
 echo Loading System Information, wait a few seconds...
 systeminfo > systeminfo.txt 2> nul
@@ -12,7 +12,7 @@ echo "| | /| / / / __ \/ /_/ / ___/ / | / / __/ / ___/ ___/
 echo "| |/ |/ / / / / / ____/ /  / /| |/ / /___(__  ) /__
 echo "|__/|__/_/_/ /_/_/   /_/  /_/ |___/_____/____/\___/
 echo.
-echo Windows Enumeration and Privilege Escalation Script
+echo Windows Enumeration and Privilege Escalation Discovery
 echo www.joshruppe.com ^| Bluesky: @joshruppe.com
 echo.
 
@@ -42,7 +42,7 @@ GOTO MENU
 
 :ALL
 echo WinPrivEsc >> report.txt
-echo Windows Enumeration and Privilege Escalation Script>> report.txt
+echo Windows Enumeration and Privilege Escalation Discovery>> report.txt
 echo www.joshruppe.com ^| Bluesky: @joshruppe.com>> report.txt
 echo.>> report.txt
 echo Report generated: %DATE% %TIME% >> report.txt
