@@ -2,6 +2,14 @@
   <img src="banner.svg" alt="WinPrivEsc" width="720">
 </p>
 
+<p align="center">
+  <img alt="Batch" src="https://img.shields.io/badge/batch-cmd.exe-blue">
+  <img alt="Dependencies" src="https://img.shields.io/badge/dependencies-zero-brightgreen">
+  <img alt="Platform" src="https://img.shields.io/badge/platform-windows-0078D6?logo=windows&logoColor=white">
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-green"></a>
+  <img alt="Use" src="https://img.shields.io/badge/use-authorized%20testing%20only-red">
+</p>
+
 A simple, dependency-free Windows batch script for system enumeration and spotting potential privilege escalation routes. It runs on a stock `cmd.exe` with no PowerShell, no `wmic`, and no external tools, so it works on locked-down and modern hosts alike.
 
 ## Usage
@@ -40,7 +48,7 @@ Options **2-7** print their section to the screen for a quick look. Option **1**
 
 ## Output
 
-When run with option **1**, results are saved to `report.txt`. Temporary files (`systeminfo.txt`, `hotfix.txt`) are created during the run and cleaned up on exit. All three are git-ignored.
+When run with option **1**, results are saved to `report.txt`. Temporary files (`systeminfo.txt`, `hotfix.txt`) are created during the run and cleaned up on exit.
 
 ## Noise and detection
 
