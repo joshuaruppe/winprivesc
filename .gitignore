@@ -1,4 +1,9 @@
+# generated reports and temp files (may contain sensitive enumeration output)
 systeminfo.txt
 hotfix.txt
+svc.txt
+priv.txt
+tasks.txt
 report.txt
-enum.bat
+enum_report.txt
+privesc_report.txt

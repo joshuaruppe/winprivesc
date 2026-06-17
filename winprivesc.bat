@@ -1,5 +1,13 @@
 @echo off
-title Windows Enumeration and Privilege Escalation Discovery
+rem ============================================================
+rem  DEPRECATED: winprivesc.bat is the original all-in-one menu.
+rem  It is superseded by the split, tiered scripts:
+rem    enum.bat / privesc.bat        (cmd, quiet|medium|loud)
+rem    enum.ps1 / privesc.ps1        (PowerShell, richer checks)
+rem  Kept for the single-menu workflow; new checks land in those.
+rem  See README.md.
+rem ============================================================
+title Windows Enumeration and Privilege Escalation Discovery (deprecated)
 echo.
 echo Loading System Information, wait a few seconds...
 systeminfo > systeminfo.txt 2> nul
@@ -14,6 +22,8 @@ echo "|__/|__/_/_/ /_/_/   /_/  /_/ |___/_____/____/\___/
 echo.
 echo Windows Enumeration and Privilege Escalation Discovery
 echo www.joshruppe.com ^| Bluesky: @joshruppe.com
+echo.
+echo [DEPRECATED] superseded by enum.bat / privesc.bat (+ .ps1) - see README
 echo.
 
 echo 1 - All to Report
