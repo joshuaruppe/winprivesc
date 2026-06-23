@@ -33,11 +33,11 @@ if "%TIER%"=="0" (
 
 set "REPORT=enum_report.txt"
 
-echo " _       ___       ____       _       ______
-echo "| |     / (_)___  / __ \_____(_)   __/ ____/_________
-echo "| | /| / / / __ \/ /_/ / ___/ / | / / __/ / ___/ ___/
-echo "| |/ |/ / / / / / ____/ /  / /| |/ / /___(__  ) /__
-echo "|__/|__/_/_/ /_/_/   /_/  /_/ |___/_____/____/\___/
+echo  _       ___       ____       _       ______
+echo ^| ^|     / (_)___  / __ \_____(_)   __/ ____/_________
+echo ^| ^| /^| / / / __ \/ /_/ / ___/ / ^| / / __/ / ___/ ___/
+echo ^| ^|/ ^|/ / / / / / ____/ /  / /^| ^|/ / /___(__  ) /__
+echo ^|__/^|__/_/_/ /_/_/   /_/  /_/ ^|___/_____/____/\___/
 echo.
 echo Windows Enumeration Script  ^|  level: %LEVEL%
 echo www.joshruppe.com ^| Bluesky: @joshruppe.com
@@ -68,9 +68,9 @@ echo.
 echo [*] Operating system >&2
 if %TIER% geq 2 (
   systeminfo > systeminfo.txt 2>nul
-  find "KB" systeminfo.txt > hotfix.txt 2>nul
+  findstr /R "KB[0-9][0-9]" systeminfo.txt > hotfix.txt 2>nul
   echo [++OS Name]
-  for /F "tokens=3-7" %%a in ('find /i "OS Name:" systeminfo.txt') do echo %%a %%b %%c %%d %%e
+  for /F "tokens=3-7" %%a in ('findstr /B /C:"OS Name:" systeminfo.txt') do echo %%a %%b %%c %%d %%e
   echo.
   echo [++OS Version]
   for /F "tokens=3-6" %%a in ('findstr /B /C:"OS Version:" systeminfo.txt') do echo %%a %%b %%c %%d
@@ -81,10 +81,10 @@ if %TIER% geq 2 (
   echo [++System Boot Time]
   for /F "tokens=4-6" %%a in ('findstr /B /C:"System Boot Time:" systeminfo.txt') do echo %%a %%b %%c
   echo.
-  echo [++Page File Location(s)]
+  echo [++Page File Location^(s^)]
   for /F "tokens=4" %%a in ('findstr /B /C:"Page File Location(s):" systeminfo.txt') do echo %%a
   echo.
-  echo [++Hotfix(s) Installed]
+  echo [++Hotfix^(s^) Installed]
   for /F "tokens=2" %%a in ('findstr /v ".TXT" hotfix.txt') do echo %%~a
   echo.
 ) else (
@@ -99,7 +99,7 @@ if %TIER% geq 2 (
   echo %PROCESSOR_ARCHITECTURE%
   echo.
   echo [++Hotfixes]
-  echo (skipped in quiet mode - run 'enum.bat medium' for systeminfo/hotfix list)
+  echo ^(skipped in quiet mode - run 'enum.bat medium' for systeminfo/hotfix list^)
   echo.
 )
 echo [++Hosts File]
@@ -175,7 +175,7 @@ if %TIER% geq 2 (
   echo.
 ) else (
   echo [++Processes]
-  echo (skipped in quiet mode - run 'enum.bat medium' for tasklist)
+  echo ^(skipped in quiet mode - run 'enum.bat medium' for tasklist^)
   echo.
 )
 if %TIER% geq 3 (

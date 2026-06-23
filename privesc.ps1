@@ -420,8 +420,12 @@ function Invoke-SecServiceDacls {
   Status 'Service DACL analysis (SDDL)'
   Hdr 'WEAK SERVICE DACLS'
   W '[++Services whose DACL grants change-config/write to low-priv principals]'
-  # SERVICE_CHANGE_CONFIG=0x2, plus WRITE_DAC=0x40000, WRITE_OWNER=0x80000, GENERIC_WRITE/ALL, SERVICE_ALL_ACCESS=0xF01FF
-  $dangerMask = 0x00000002 -bor 0x00040000 -bor 0x00080000 -bor 0x10000000 -bor 0x000F01FF
+  # Only rights that let a low-priv principal RECONFIGURE/seize a service (-> SYSTEM exec).
+  # Deliberately excludes the benign query/read bits (SERVICE_QUERY_*, READ_CONTROL, etc.):
+  # INTERACTIVE holds those on almost every service by default, so including the full
+  # SERVICE_ALL_ACCESS (0xF01FF) here flagged ~every service. SERVICE_CHANGE_CONFIG=0x2,
+  # WRITE_DAC=0x40000, WRITE_OWNER=0x80000, GENERIC_ALL=0x10000000, GENERIC_WRITE=0x40000000.
+  $dangerMask = 0x00000002 -bor 0x00040000 -bor 0x00080000 -bor 0x10000000 -bor 0x40000000
   $svcNames = (Get-Service -ErrorAction SilentlyContinue).Name
   foreach ($n in $svcNames) {
     $sddl = (& sc.exe sdshow "$n" 2>$null) -join ''
@@ -431,7 +435,7 @@ function Invoke-SecServiceDacls {
     foreach ($ace in $sd.DiscretionaryAcl) {
       if ($ace.AceType -ne 'AccessAllowed') { continue }
       $sid = $ace.SecurityIdentifier.Value
-      $isLow = ($script:LowPrivSids -contains $sid) -or ($script:MySids -contains $sid)
+      $isLow = $script:LowPrivSids -contains $sid
       if ($isLow -and (($ace.AccessMask -band $dangerMask) -ne 0)) {
         W ("[!] {0}: {1} has mask 0x{2:X}  (sddl: {3})" -f $n, $sid, $ace.AccessMask, $sddl)
         break

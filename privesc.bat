@@ -49,11 +49,11 @@ if "%TIER%"=="0" (
 
 set "REPORT=privesc_report.txt"
 
-echo " _       ___       ____       _       ______
-echo "| |     / (_)___  / __ \_____(_)   __/ ____/_________
-echo "| | /| / / / __ \/ /_/ / ___/ / | / / __/ / ___/ ___/
-echo "| |/ |/ / / / / / ____/ /  / /| |/ / /___(__  ) /__
-echo "|__/|__/_/_/ /_/_/   /_/  /_/ |___/_____/____/\___/
+echo  _       ___       ____       _       ______
+echo ^| ^|     / (_)___  / __ \_____(_)   __/ ____/_________
+echo ^| ^| /^| / / / __ \/ /_/ / ___/ / ^| / / __/ / ___/ ___/
+echo ^| ^|/ ^|/ / / / / / ____/ /  / /^| ^|/ / /___(__  ) /__
+echo ^|__/^|__/_/_/ /_/_/   /_/  /_/ ^|___/_____/____/\___/
 echo.
 echo Privilege Escalation Vector Checks  ^|  level: %LEVEL%
 echo www.joshruppe.com ^| Bluesky: @joshruppe.com
@@ -144,7 +144,7 @@ echo [*] Service binary / path checks >&2
 rem one reg read, filtered to non-Windows ImagePaths in a single
 rem findstr chain; per-row tests below are pure string ops (no
 rem findstr per service, so the quiet tier stays quiet).
-reg query HKLM\SYSTEM\CurrentControlSet\Services /s /v ImagePath 2>nul | findstr /i "ImagePath" | findstr /i /v "Windows SystemRoot System32" > svc.txt
+reg query HKLM\SYSTEM\CurrentControlSet\Services /s /v ImagePath 2>nul | findstr /i "ImagePath" | findstr /i /v /r "\\Windows\\. \\SystemRoot\\." > svc.txt
 echo [++Service Binaries Outside Windows Dir - review for writable binary/dir (privesc.ps1 tests writability)]
 for /f "tokens=1,2,*" %%a in (svc.txt) do echo %%c
 echo.
